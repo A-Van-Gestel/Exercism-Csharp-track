@@ -7,13 +7,13 @@ static class LogLine
     public static string Message(string logLine)
     {
 
-        string message = ExtractLogLine(logLine).Groups["MESSAGE"].Value;
-        return RemoveWhitespaceCharacters(message);
+        string message = ExtractLogLineMatch(logLine).Groups["MESSAGE"].Value;
+        return message.Trim();
     }
 
     public static string LogLevel(string logLine)
     {
-        string level = ExtractLogLine(logLine).Groups["LEVEL"].Value;
+        string level = ExtractLogLineMatch(logLine).Groups["LEVEL"].Value;
         return level.ToLower();
     }
 
@@ -28,21 +28,9 @@ static class LogLine
     /// Extract LEVEL & MESSAGE from log line
     /// </summary>
     /// <returns>Match object with LEVEL & MESSAGE named groups</returns>
-    private static Match ExtractLogLine(string logLine)
+    private static Match ExtractLogLineMatch(string logLine)
     {
         Regex regex = new Regex(RegexString, RegexOptions.IgnoreCase);
         return regex.Match(logLine);
-    }
-
-    /// <summary>
-    /// Remove trailing whitespace characters from message
-    /// </summary>
-    /// <returns>Match object with LEVEL & MESSAGE named groups</returns>
-    private static string RemoveWhitespaceCharacters(string message)
-    {
-        message = message.Replace(@"\t", "");
-        message = message.Replace(@"\r", "");
-        message = message.Replace(@"\n", "");
-        return message.Trim();
     }
 }
