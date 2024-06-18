@@ -11,3 +11,4 @@ This repository contains my solutions for the [exercism C# track](https://exerci
 | 003 | [Annalyn's Infiltration](./annalyns-infiltration)        |     Booleans      | Learning Exercise |
 | 004 | [Log Levels](./log-levels)                               |      Strings      | Learning Exercise |
 | 005 | [Log Analysis](./log-analysis)                           | Extension Methods | Learning Exercise |
+| 006 | [Phone Number Analysis](./phone-number-analysis)         |      Tuples       | Learning Exercise |
