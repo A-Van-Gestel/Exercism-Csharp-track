@@ -7,13 +7,13 @@ static class LogLine
     public static string Message(string logLine)
     {
 
-        string message = ExtractLogLineMatch(logLine).Groups["MESSAGE"].Value;
+        string message = ExtractLogLine(logLine).message;
         return message.Trim();
     }
 
     public static string LogLevel(string logLine)
     {
-        string level = ExtractLogLineMatch(logLine).Groups["LEVEL"].Value;
+        string level = ExtractLogLine(logLine).level;
         return level.ToLower();
     }
 
@@ -27,10 +27,11 @@ static class LogLine
     /// <summary>
     /// Extract LEVEL & MESSAGE from log line
     /// </summary>
-    /// <returns>Match object with LEVEL & MESSAGE named groups</returns>
-    private static Match ExtractLogLineMatch(string logLine)
+    /// <returns>Tuple with level & message properties</returns>
+    private static (string level, string message) ExtractLogLine(string logLine)
     {
         Regex regex = new Regex(RegexString, RegexOptions.IgnoreCase);
-        return regex.Match(logLine);
+        Match match = regex.Match(logLine);
+        return (match.Groups["LEVEL"].Value, match.Groups["MESSAGE"].Value);
     }
 }
